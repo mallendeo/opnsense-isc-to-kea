@@ -1,6 +1,6 @@
 {
   "name": "isc-to-kea-migrator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Migrate ISC DHCP configurations to Kea DHCP format",
   "type": "module",
   "main": "src/index.ts",
