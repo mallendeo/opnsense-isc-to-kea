@@ -80,14 +80,14 @@ function parseArgs(): MigrationConfig | null {
 }
 
 async function main(): Promise<void> {
-  console.log('===============================================================');
-  console.log('          ISC DHCP to Kea DHCP Migration Tool');
-  console.log('===============================================================\n');
-
   const config = parseArgs();
   if (!config) {
     process.exit(1);
   }
+
+  console.log('===============================================================');
+  console.log('          ISC DHCP to Kea DHCP Migration Tool');
+  console.log('===============================================================\n');
 
   try {
     console.log(`Reading input file: ${config.inputFile}...`);
