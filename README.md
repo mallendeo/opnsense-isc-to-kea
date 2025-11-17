@@ -218,6 +218,16 @@ bun test
 
 ## Troubleshooting
 
+### macOS: Binary is damaged
+
+**Issue**: "isc-to-kea is damaged and can't be opened"
+
+**Solution**: Remove quarantine attribute from downloaded binary:
+```bash
+xattr -d com.apple.quarantine isc-to-kea-darwin-arm64
+chmod +x isc-to-kea-darwin-arm64
+```
+
 ### No subnets found
 
 **Issue**: "No <Kea> section found in XML"
