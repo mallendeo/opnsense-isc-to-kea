@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<opnsense>
+  <!-- ISC DHCP Configuration -->
+  <dhcpd>
+    <lan>
+      <staticmap>
+        <mac>00:11:22:33:44:55</mac>
+        <ipaddr>192.168.1.100</ipaddr>
+        <hostname>webserver</hostname>
+        <descr>Production Web Server</descr>
+      </staticmap>
+      <staticmap>
+        <mac>00:11:22:33:44:66</mac>
+        <ipaddr>192.168.1.101</ipaddr>
+        <hostname>dbserver</hostname>
+        <descr>Database Server</descr>
+      </staticmap>
+      <staticmap>
+        <mac>00:11:22:33:44:77</mac>
+        <ipaddr>192.168.1.102</ipaddr>
+        <hostname>mailserver</hostname>
+        <descr>Mail Server</descr>
+      </staticmap>
+      <staticmap>
+        <mac>AA:BB:CC:DD:EE:FF</mac>
+        <ipaddr>10.0.0.50</ipaddr>
+        <hostname>vpnserver</hostname>
+        <descr>VPN Gateway</descr>
+      </staticmap>
+    </lan>
+  </dhcpd>
+
+  <!-- Kea DHCP Configuration -->
+  <Kea>
+    <dhcp4>
+      <subnets>
+        <subnet>
+          <uuid>550e8400-e29b-41d4-a716-446655440000</uuid>
+          <subnet>192.168.1.0/24</subnet>
+        </subnet>
+        <subnet>
+          <uuid>660e8400-e29b-41d4-a716-446655440001</uuid>
+          <subnet>10.0.0.0/8</subnet>
+        </subnet>
+      </subnets>
+    </dhcp4>
+  </Kea>
+</opnsense>

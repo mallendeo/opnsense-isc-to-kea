@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<opnsense>
+  <dhcpd>
+    <lan>
+      <staticmap>
+        <mac>00:11:22:33:44:55</mac>
+        <ipaddr>192.168.1.100</ipaddr>
+        <hostname>webserver</hostname>
+        <descr>Production Web Server</descr>
+      </staticmap>
+      <staticmap>
+        <mac>00:11:22:33:44:66</mac>
+        <ipaddr>192.168.1.101</ipaddr>
+        <hostname>dbserver</hostname>
+        <descr>Database Server</descr>
+      </staticmap>
+      <staticmap>
+        <mac>00:11:22:33:44:77</mac>
+        <ipaddr>192.168.1.102</ipaddr>
+        <hostname>mailserver</hostname>
+        <descr>Mail Server</descr>
+      </staticmap>
+      <staticmap>
+        <mac>AA:BB:CC:DD:EE:FF</mac>
+        <ipaddr>10.0.0.50</ipaddr>
+        <hostname>vpnserver</hostname>
+        <descr>VPN Gateway</descr>
+      </staticmap>
+    </lan>
+  </dhcpd>
+  <Kea>
+    <dhcp4>
+      <subnets>
+        <subnet>
+          <uuid>550e8400-e29b-41d4-a716-446655440000</uuid>
+          <subnet>192.168.1.0/24</subnet>
+        </subnet>
+        <subnet>
+          <uuid>660e8400-e29b-41d4-a716-446655440001</uuid>
+          <subnet>10.0.0.0/8</subnet>
+        </subnet>
+      </subnets>
+      <reservations>
+        <reservation>
+          <uuid>ff95a328-5f06-4d52-899b-0d59daf03078</uuid>
+          <subnet>550e8400-e29b-41d4-a716-446655440000</subnet>
+          <hw_address>00:11:22:33:44:55</hw_address>
+          <ip_address>192.168.1.100</ip_address>
+          <hostname>webserver</hostname>
+          <description>Production Web Server</description>
+        </reservation>
+        <reservation>
+          <uuid>d5d7e2f5-7003-427c-ae28-15828c759d44</uuid>
+          <subnet>550e8400-e29b-41d4-a716-446655440000</subnet>
+          <hw_address>00:11:22:33:44:66</hw_address>
+          <ip_address>192.168.1.101</ip_address>
+          <hostname>dbserver</hostname>
+          <description>Database Server</description>
+        </reservation>
+        <reservation>
+          <uuid>d7cef5d5-1b8b-4a71-8a96-3ebb027414dc</uuid>
+          <subnet>550e8400-e29b-41d4-a716-446655440000</subnet>
+          <hw_address>00:11:22:33:44:77</hw_address>
+          <ip_address>192.168.1.102</ip_address>
+          <hostname>mailserver</hostname>
+          <description>Mail Server</description>
+        </reservation>
+        <reservation>
+          <uuid>abd27aaa-225b-4a94-81ec-52c10a37b830</uuid>
+          <subnet>660e8400-e29b-41d4-a716-446655440001</subnet>
+          <hw_address>AA:BB:CC:DD:EE:FF</hw_address>
+          <ip_address>10.0.0.50</ip_address>
+          <hostname>vpnserver</hostname>
+          <description>VPN Gateway</description>
+        </reservation>
+      </reservations>
+    </dhcp4>
+  </Kea>
+</opnsense>
