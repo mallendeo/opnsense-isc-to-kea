@@ -1,0 +1,65 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build ${{ matrix.target }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            target: bun-linux-x64
+            artifact: isc-to-kea-linux-x64
+          - os: ubuntu-latest
+            target: bun-linux-arm64
+            artifact: isc-to-kea-linux-arm64
+          - os: macos-latest
+            target: bun-darwin-x64
+            artifact: isc-to-kea-darwin-x64
+          - os: macos-latest
+            target: bun-darwin-arm64
+            artifact: isc-to-kea-darwin-arm64
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - run: bun install
+
+      - run: bun test
+
+      - run: bun build ./src/index.ts --compile --target=${{ matrix.target }} --outfile ${{ matrix.artifact }}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact }}
+          path: ${{ matrix.artifact }}
+
+  release:
+    name: Release
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref_type == 'tag'
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - run: ls -R artifacts
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: artifacts/**/isc-to-kea-*
+          generate_release_notes: true
